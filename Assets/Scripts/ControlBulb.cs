@@ -7,6 +7,7 @@ public class ControlBulb : MonoBehaviour
     private  BulbFunctions Bulb;
     private Renderer rend;
     public GameObject target;
+    public float EmissionMultiplier = 1;
 
     private Light lights;
     
@@ -24,12 +25,16 @@ public class ControlBulb : MonoBehaviour
         
         float relativeX = Bulb.getRelativePosition(target,gameObject); // set the value of "brightness" through method GetDeltaX()
         
-        Bulb.ChangeBrightness(gameObject,rend,relativeX,1.0f); // change the emission value through mathod ChangeBrightness()
+        Bulb.ChangeEmission(gameObject,rend,relativeX,EmissionMultiplier); // change the emission value through method ChangeBrightness()
         
         Bulb.RotateToTarget(target,gameObject, 5.0f); // rotate to target object through mathod RotateToTarget()
 
-        Bulb.ChangeLightIntensity(lights,relativeX,4.0f);
+        //Bulb.ChangeLightIntensity(lights,relativeX,1.0f);
+        
+        float redness = Bulb.Remap(relativeX,0,1,0,1);
+        //Debug.Log(relativeX);
 
-        //Bulb.ChangeLightColor(gameObject,rend,255,0,0);
+        Bulb.ChangeEmissionColor(gameObject,rend,redness,0,0);
+        //Debug.Log(redness);
     }
 }

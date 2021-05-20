@@ -41,14 +41,15 @@ public class BulbFunctions
         }*/
     }
 
-    public void ChangeBrightness(GameObject self, Renderer rend , float brightness , float multiplier){
+    public void ChangeEmission(GameObject self, Renderer rend , float brightness , float multiplier){
         rend = self.GetComponent<Renderer>();
-        rend.material.SetFloat("_intensity", brightness* multiplier ); 
+        rend.material.SetFloat("_intensity", brightness * multiplier); 
     }
 
-    public void ChangeLightColor(GameObject self , Renderer rend , float r, float g, float b ){
+    public void ChangeEmissionColor(GameObject self , Renderer rend , float r, float g, float b ){
         rend = self.GetComponent<Renderer>();
-        rend.material.SetColor("_emissionColor",new Color(r,g,b));    
+        //rend.material.SetColor("_emissionColor",new Color(r,g,b));   
+        rend.material.SetColor("_emissionColor",new Color(r,g,b)); 
     }
 
     /*public void GetLightChild(GameObject self){
@@ -68,7 +69,12 @@ public class BulbFunctions
         else{
             Debug.Log("Check Wheather the Child light is Attached");
         }
-
-
     }
+    
+    public float Remap (float value, float from1, float to1, float from2, float to2) {
+        return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
+    }
+   
 }
+
+
